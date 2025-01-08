@@ -15,10 +15,15 @@ const scissorsButton = document.createElement("button");
 scissorsButton.setAttribute("id", "scissors");
 scissorsButton.textContent = "Scissors"
 
+const scoreSheet = document.createElement("div");
+scoreSheet.setAttribute("id", "score");
+
+
 const container = document.createElement("div");
 container.appendChild(rockButton);
 container.appendChild(paperButton);
 container.appendChild(scissorsButton);
+container.appendChild(scoreSheet);
 
 document.body.appendChild(container);
 
@@ -53,15 +58,16 @@ function getHumanChoice() {
 }
 
 
-// const humanSelection = getHumanChoice();
-// const computerSelection = getComputerChoice();
+// Logic to play game
 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    let selectionResult;
     function playRound(humanChoice, computerChoice) {
         let hum = humanChoice; // Script was incorrectly displaying winner before this was added.
         let comp = computerChoice; // Temporary values to store the random value so that winner can be determined correctly.
+        selectionResult = `You Chose ${hum}, Computer chose ${comp}`;
         console.log(`You Chose ${hum}`);
         console.log(`Computer Chose ${comp}`);
 
@@ -89,14 +95,19 @@ function playGame() {
     console.log(`Final Score: ${humanScore}, Compter: ${computerScore}`);
     let score1 = humanScore;
     let score2 = computerScore;
+    let scoreResult;
 
     if (score1 > score2) {
+        scoreResult = "Congratulations, you won!";
         console.log("Congratulations, you won!");
     } else if (score2 > score1) {
+        scoreResult = "Better luck next time!";
         console.log("Better luck next time!");
     } else {
+        scoreResult = "Draw";
         console.log("Draw")
     }
+    scoreSheet.textContent = selectionResult + "\n" + scoreResult;
 }
 
 buttons.forEach(button => {
