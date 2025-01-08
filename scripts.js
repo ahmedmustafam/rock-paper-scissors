@@ -29,40 +29,26 @@ function playGame() {
         let comp = computerChoice; // Temporary values to store the random value so that winner can be determined correctly.
         console.log(`You Chose ${hum}`);
         console.log(`Computer Chose ${comp}`);
-    
-        if (hum === "Rock" && comp === "Paper") {
-            console.log("You Lose.");
-            ++computerScore;
-            console.log(`Score: You: ${humanScore}, Computer: ${computerScore}`);
-        } else if (hum === "Rock" && comp === "Scissors") {
+
+        if (hum === "Rock" && comp === "Scissors" ||
+            hum === "Paper" && comp === "Rock" ||
+            hum === "Scissors" && comp === "Paper"
+        ) {
             console.log("You Win!");
             ++humanScore;
             console.log(`Score: You: ${humanScore}, Computer: ${computerScore}`);
-        } else if (hum === "Paper" && comp === "Scissors") {
+        } else if (hum === "Rock" && comp === "Paper" ||
+            hum === "Paper" && comp === "Scissors" ||
+            hum === "Scissors" && comp === "Rock"
+         ) {
             console.log("You Lose.");
             ++computerScore;
             console.log(`Score: You: ${humanScore}, Computer: ${computerScore}`);
-        } else if (hum === "Paper" && comp === "Rock") {
-            console.log("You Win");
-            ++humanScore;
-            console.log(`Score: You: ${humanScore}, Computer: ${computerScore}`);
-        } else if (hum === "Scissors" && comp === "Rock") {
-            console.log("You Lose.");
-            ++computerScore;
-            console.log(`Score: You: ${humanScore}, Computer: ${computerScore}`);
-        } else if (hum === "Scissors" && comp === "Paper") {
-            console.log("You Win");
-            ++humanScore;
-            console.log(`Score: You: ${humanScore}, Computer: ${computerScore}`);
-        } else {
-            console.log("Draw");
-        }
+         } else {
+            console.log("Draw")
+         }
     }
 
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
-    playRound(getHumanChoice(),getComputerChoice());
     playRound(getHumanChoice(),getComputerChoice());
 
     console.log(`Final Score: ${humanScore}, Compter: ${computerScore}`);
