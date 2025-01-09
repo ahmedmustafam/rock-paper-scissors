@@ -74,12 +74,13 @@ function playGame() {
     
     function resetGame() {
         alert(`Game Over! Final Score: You: ${humanScore}, Computer: ${computerScore}` );
-        humanScore = 0;
-        computerScore = 0;
-        roundPlayed = 0;
         scoreResult.textContent = "Game Over!, Final Score:";
         selectionResult.textContent = "";
         console.log("Game reset");
+        humanScore = 0;
+        computerScore = 0;
+        roundPlayed = 0;
+        
         
     }
 
