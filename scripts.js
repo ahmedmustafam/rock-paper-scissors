@@ -2,7 +2,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-
+// Declaring variables to be html elements
 const rockButton = document.createElement("button");
 rockButton.setAttribute("id", "rock");
 rockButton.textContent = "Rock";
@@ -15,15 +15,22 @@ const scissorsButton = document.createElement("button");
 scissorsButton.setAttribute("id", "scissors");
 scissorsButton.textContent = "Scissors"
 
-const scoreSheet = document.createElement("div");
-scoreSheet.setAttribute("id", "score");
+const selectionResult = document.createElement("div");
+selectionResult.classList.toggle("score");
+const scoreResult = document.createElement("div");
+scoreResult.classList.toggle("score");
+const scoreCount = document.createElement("p");
+scoreCount.classList.toggle("score");
 
 
 const container = document.createElement("div");
+container.classList.toggle("container");
 container.appendChild(rockButton);
 container.appendChild(paperButton);
 container.appendChild(scissorsButton);
-container.appendChild(scoreSheet);
+container.appendChild(selectionResult);
+container.appendChild(scoreResult);
+container.appendChild(scoreCount);
 
 document.body.appendChild(container);
 
@@ -59,15 +66,28 @@ function getHumanChoice() {
 
 
 // Logic to play game
+let humanScore = 0;
+let computerScore = 0;
+let roundPlayed = 0;
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let selectionResult;
+    
+    function resetGame() {
+        alert(`Game Over! Final Score: You: ${humanScore}, Computer: ${computerScore}` );
+        humanScore = 0;
+        computerScore = 0;
+        roundPlayed = 0;
+        scoreResult.textContent = "Game Over!, Final Score:";
+        selectionResult.textContent = "";
+        console.log("Game reset");
+        
+    }
+
     function playRound(humanChoice, computerChoice) {
+        ++roundPlayed;
         let hum = humanChoice; // Script was incorrectly displaying winner before this was added.
         let comp = computerChoice; // Temporary values to store the random value so that winner can be determined correctly.
-        selectionResult = `You Chose ${hum}, Computer chose ${comp}`;
+        selectionResult.textContent = `You Chose ${hum}, Computer chose ${comp}`;
         console.log(`You Chose ${hum}`);
         console.log(`Computer Chose ${comp}`);
 
@@ -88,26 +108,31 @@ function playGame() {
          } else {
             console.log("Draw")
          }
+         
     }
-
-    playRound(getHumanChoice(), getComputerChoice());
 
     console.log(`Final Score: ${humanScore}, Compter: ${computerScore}`);
+    scoreCount.textContent = `Score: You: ${humanScore}, Computer: ${computerScore}`;
     let score1 = humanScore;
     let score2 = computerScore;
-    let scoreResult;
 
     if (score1 > score2) {
-        scoreResult = "Congratulations, you won!";
+        scoreResult.textContent = "Congratulations, you won!";
         console.log("Congratulations, you won!");
     } else if (score2 > score1) {
-        scoreResult = "Better luck next time!";
+        scoreResult.textContent = "Better luck next time!";
         console.log("Better luck next time!");
     } else {
-        scoreResult = "Draw";
+        scoreResult.textContent = "Draw";
         console.log("Draw")
     }
-    scoreSheet.textContent = selectionResult + "\n" + scoreResult;
+
+    //statement to reset after 5 rounds
+    if (roundPlayed === 5) {
+        resetGame();
+    }
+    
+    playRound(getHumanChoice(), getComputerChoice());
 }
 
 buttons.forEach(button => {
