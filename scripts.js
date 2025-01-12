@@ -20,6 +20,9 @@ scoreResult.classList.toggle("score");
 const scoreCount = document.createElement("p");
 scoreCount.classList.toggle("score");
 
+const playAgain = document.createElement("p");
+playAgain.textContent = "Click any button to play again!"
+
 
 const container = document.createElement("div");
 container.classList.toggle("container");
@@ -101,11 +104,11 @@ function playRound(humanChoice, computerChoice) {
 function resetGame() {
     alert(`Gamer Over! Final Score: You: ${humanScore}, Computer: ${computerScore}`);
     scoreResult.textContent = `Game Over! Final Score:`;
-    selectionResult.textContent = '';
     console.log("Game Reset");
     humanScore = 0;
     computerScore = 0;
-    roundsPlayed = 0;
+    roundsPlayed = 0;  
+    container.appendChild(playAgain); 
 }
 
 function playGame() {
